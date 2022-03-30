@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MesageComponent } from './mesage.component';
+import { MessageComponent } from './message.component';
 
 
 
 @NgModule({
   declarations: [
-    MesageComponent
+    MessageComponent
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    MesageComponent
+    MessageComponent
   ]
 })
-export class MesageModule { }
+export class MessageModule { }
