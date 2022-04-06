@@ -17,7 +17,7 @@ export class UserService {
     }
   }
 
-  decodeJWT() {
+  private decodeJWT() {
     const token = this.tokenService.getToken()
     const user = jwt_decode(token) as User
     this.userSubject.next(user)
@@ -38,7 +38,7 @@ export class UserService {
   }
 
   isLogged() {
-    return this.tokenService.hasToken
+    return this.tokenService.hasToken()
   }
 
 }

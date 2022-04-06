@@ -20,6 +20,6 @@ export class TokenService {
   }
 
   hasToken() {
-    return !!this.getToken
+    return !!this.getToken()
   }
 }
