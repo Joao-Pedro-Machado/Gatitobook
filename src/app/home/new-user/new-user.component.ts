@@ -1,8 +1,11 @@
+import { UserExistsService } from './user-exists.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { lowerCaseValidator } from './lowerCase.validator';
 import { NewUser } from './new-user';
 import { NewUserService } from './new-user.service';
+import { userPasswordMatchValidator } from './user-password-match';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-user',
@@ -15,7 +18,9 @@ export class NewUserComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private newUserService: NewUserService
+    private newUserService: NewUserService,
+    private userExistsService: UserExistsService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -29,15 +34,26 @@ export class NewUserComponent implements OnInit {
         Validators.minLength(4)
       ]],
       userName: ['', [
-        lowerCaseValidator
-      ]],
+          lowerCaseValidator
+        ],
+        [ this.userExistsService.verifyUserAlreadyExists() ]
+      ],
       password: ['']
+    },{
+      validators: [userPasswordMatchValidator]
     })
   }
 
   register() {
-    const newUser = this.newUserForm.getRawValue() as NewUser
-    console.log(newUser)
+    if(this.newUserForm.valid) {
+      const newUser = this.newUserForm.getRawValue() as NewUser
+      this.newUserService.registerNewUser(newUser).subscribe(() => {
+        this.router.navigate([''])
+      },
+      (error) => {
+        console.log(error)
+      })
+    }
   }
 
 }

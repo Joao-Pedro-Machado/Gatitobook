@@ -14,6 +14,6 @@ export class NewUserService {
   }
 
   userAlreadyExists(userName: string) {
-    return this.http.get(`http://lcoalhost:3000/user/exists/${userName}`)
+    return this.http.get(`http://localhost:3000/user/exists/${userName}`)
   }
 }
