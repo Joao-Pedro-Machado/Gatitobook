@@ -5,7 +5,7 @@
 
   <div #animalsList class="row">
     <div *ngFor="let animal of animals" class="col-4">
-      <a class="" [routerLink]="['/animals', animal.id]">
+      <a class="text-dark" [routerLink]="['/animals', animal.id]">
         <app-card>
           <div class="container-fluid">
             <app-animal
