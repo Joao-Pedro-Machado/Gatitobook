@@ -1,0 +1,34 @@
+<div class="bg-white border" *ngIf="animal$ | async as animal">
+  <div class="row">
+    <div class="col-lg-8">
+      <app-animal
+        [url]="animal.url"
+        [description]="animal.description"
+      ></app-animal>
+    </div>
+    <div class="col-lg-4">
+      <div class="d-flex flex-row">
+        <p class="text-left breack-word">{{ animal.description }}</p>
+        <button class="btn mx-2">
+          <i (click)="like()" class="fa fa-heart-o fa-2x pull pull-left"></i>
+          <span class="fs-4">
+            {{ animal.likes }}
+          </span>
+        </button>
+
+        <button class="btn mx-2">
+          <i class="fa fa-comment-o fa-2x pull pull-left"></i>
+          <span class="fs-4">{{ animal.comments }}</span>
+        </button>
+
+        <button class="btn">
+          <i (click)="remove()" class="fa fa-trash-o fa-2x"></i>
+        </button>
+
+        <a [routerLink]="['/animals']">
+          <button class="btn btn-primary mx-4 mt-2">Voltar</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
