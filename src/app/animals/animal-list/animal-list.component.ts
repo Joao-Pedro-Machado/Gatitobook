@@ -2,6 +2,7 @@ import { UserService } from 'src/app/auth/user/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Animals } from '../animals';
 import { AnimalsService } from '../animals.service';
+import { Observable, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-animal-list',
@@ -9,7 +10,7 @@ import { AnimalsService } from '../animals.service';
   styleUrls: ['./animal-list.component.css'],
 })
 export class AnimalListComponent implements OnInit {
-  animals!: Animals;
+  animals$!: Observable<Animals>;
 
   constructor(
     private userService: UserService,
@@ -17,11 +18,11 @@ export class AnimalListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userService.getUser().subscribe((user) => {
-      const userName = user.name ?? '';
-      this.animalsService.userList(userName).subscribe((animals) => {
-        this.animals = animals;
-      });
-    });
+    this.animals$ = this.userService.getUser().pipe(
+      switchMap((user) => {
+        const userName = user.name ?? '';
+        return this.animalsService.userList(userName);
+      })
+    );
   }
 }
