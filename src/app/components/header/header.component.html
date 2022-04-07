@@ -1,19 +1,20 @@
-<header class="sticky-top">
-  <nav class="navbar navbar-light bg-withe">
-    <a class="navbar-brand">Gatito Book</a>
+<header class="sticky-top bg-white">
+  <nav class="navbar navbar-expand-lg navbar-light bg-withe d-flex justify-content-between">
+    <a class="navbar-brand mx-5 pe-none">Gatito Book</a>
     <div *ngIf="user$ | async as user">
-      <div *ngIf="user.name; else login" >
-        <i class="fa fa-user-circle mr-1" ></i>
-        <a class="mr-1">{{ user.name }}</a>
-        <a (click)="logout()">Logout</a>
+      <div *ngIf="user.name">
+        <ul class="navbar-nav mx-4">
+          <li class="nav-item">
+            <i class="nav-link fa fa-user-circle mt-1"></i>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link pe-none">{{ user.name.toUpperCase() }}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link pe-auto" (click)="logout()">Logout</a>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>
-
-  <ng-template #login>
-    <span class="navbar-text" >
-      <a [routerLink]="['']">Login</a>
-    </span>
-  </ng-template>
-
 </header>
