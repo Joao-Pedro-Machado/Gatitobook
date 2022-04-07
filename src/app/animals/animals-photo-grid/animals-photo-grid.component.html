@@ -5,16 +5,22 @@
 
   <div #animalsList class="row">
     <div *ngFor="let animal of animals" class="col-4">
-      <a [routerLink]="['/animals', animal.id]"></a>
-      <app-card>
-        <app-animal [url]="animal.url" [description]="animal.description"></app-animal>
-        <i aria-hidden="true" class="fa fa-heart-o fa-1x m-2">
-          <span class="mx-1">{{ animal.likes }}</span>
-        </i>
-        <i aria-hidden="true" class="fa fa-comment-o fa-1x m-2">
-          <span class="mx-1">{{ animal.comments }}</span>
-        </i>
-      </app-card>
+      <a class="" [routerLink]="['/animals', animal.id]">
+        <app-card>
+          <div class="container-fluid w-100">
+            <app-animal
+              [url]="animal.url"
+              [description]="animal.description"
+            ></app-animal>
+            <i aria-hidden="true" class="fa fa-heart-o fa-1x m-2">
+              <span class="mx-1">{{ animal.likes }}</span>
+            </i>
+            <i aria-hidden="true" class="fa fa-comment-o fa-1x m-2">
+              <span class="mx-1">{{ animal.comments }}</span>
+            </i>
+          </div>
+        </app-card>
+      </a>
     </div>
   </div>
 </div>
