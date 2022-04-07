@@ -1,8 +1,8 @@
 import { environment } from './../../environments/environment';
 import { TokenService } from './../auth/token.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, mapTo, Observable, of, throwError } from 'rxjs';
+import { catchError, mapTo, Observable, of, throwError } from 'rxjs';
 import { Animal, Animals } from './animals';
 
 const API = environment.apiURL;
@@ -28,7 +28,7 @@ export class AnimalsService {
 
   like(id: number): Observable<boolean> {
     return this.http
-      .post(`${API}/photos/${id}/likes`, {}, { observe: 'response' })
+      .post(`${API}/photos/${id}/like`, {}, { observe: 'response' })
       .pipe(
         mapTo(true),
         catchError((error) => {
