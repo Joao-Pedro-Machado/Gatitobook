@@ -22,7 +22,7 @@
       </div>
       <app-message
         message="tamanho máximo de 300 caracteres"
-        *ngIf="!!commentForm.get('comment')?.errors?.maxLength"
+        *ngIf="!!commentForm.get('comment')?.errors?.['maxLength']"
       ></app-message>
     </form>
   </div>
