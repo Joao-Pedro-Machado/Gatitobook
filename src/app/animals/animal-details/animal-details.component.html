@@ -31,6 +31,17 @@
         <a [routerLink]="['/animals']">
           <button class="btn btn-primary mx-4 mt-2">Voltar</button>
         </a>
+
+        <div class="">
+          <app-comments
+            [id]="animalId"
+            *ngIf="animal.allowComments; else warning"
+          ></app-comments>
+
+          <ng-template #warning>
+            <p>Comentários desabilitados</p>
+          </ng-template>
+        </div>
       </div>
     </div>
   </div>
