@@ -1,29 +1,38 @@
-<div *ngIf="comments$ | async as comments">
-  <ul class="list-unstyled comment-list">
-    <li *ngFor="let comment of comments">
-      <p class="text-dark font-weight-bold mr-1">{{ comment.userName }}</p>
-      <em>{{ comment.date | date: "dd-MM-yyyy HH:mm" }}</em>
-      <p class="break-word mb-2">{{ comment.text }}</p>
-    </li>
-  </ul>
+<div class="mt-4 mx-2">
+  <h4 class="text-center">Comentários</h4>
 
-  <div class="mt-4">
-    <form [formGroup]="commentForm" (submit)="save()">
-      <div class="input-group">
-        <textarea class="form-control" formControlName="comment"></textarea>
-        <div class="input-group-append">
-          <button
-            [disabled]="commentForm.invalid"
-            class="btn btn-primary pull-left"
-          >
-            Publicar
-          </button>
+  <div *ngIf="comments$ | async as comments">
+    <ul class="list-unstyled comment-list border border-dark overflow-hidden">
+      <li class="m-2 border-bottom" *ngFor="let comment of comments">
+        <div class="d-flex justify-content-between">
+          <p class="text-dark font-weight-bold mx-1 d-inline">
+            {{ comment.userName }}
+          </p>
+          <p class="d-inline">{{ comment.date | date: "dd-MM-yyyy" }}</p>
+          <p class="d-inline">{{ comment.date | date: "HH:mm" }}</p>
         </div>
-      </div>
-      <app-message
-        message="tamanho máximo de 300 caracteres"
-        *ngIf="!!commentForm.get('comment')?.errors?.['maxLength']"
-      ></app-message>
-    </form>
+
+        <p class="break-word mb-2">{{ comment.text }}</p>
+      </li>
+    </ul>
+
+    <div class="mt-4">
+      <form [formGroup]="commentForm" (submit)="save()">
+        <div class="input-group">
+          <div class="w-100 h-100 text-area">
+            <textarea class="form-control" formControlName="comment"></textarea>
+          </div>
+          <div class="input-group-append mt-2 justify-content-center">
+            <button [disabled]="commentForm.invalid" class="btn btn-primary">
+              Publicar
+            </button>
+          </div>
+        </div>
+        <app-message
+          message="tamanho máximo de 300 caracteres"
+          *ngIf="!!commentForm.get('comment')?.errors?.['maxLength']"
+        ></app-message>
+      </form>
+    </div>
   </div>
 </div>
