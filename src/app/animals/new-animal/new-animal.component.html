@@ -1,1 +1,30 @@
-<p>new-animal works!</p>
+<div class="container">
+  <form [formGroup]="animalForm" class="row" (submit)="upload()">
+    <div class="col-md-6 text-center">
+      <div class="form-group" *ngIf="!preview; else previewImage">
+        <button
+          type="button"
+          (click)="fileInput.click()"
+          class="btn btn-primary"
+        >
+          <i class="fa fa-image fa-4x align-middle"></i>
+        </button>
+        <input
+          #fileInput
+          type="file"
+          hidden
+          formControlName="file"
+          accept="image/*"
+          (change)="saveFile($event.target)"
+        />
+      </div>
+      <app-message
+        message="Por favor selecione uma foto"
+        *ngIf="!!animalForm.get('file')?.errors?.['maxLength']"
+      ></app-message>
+    </div>
+    <ng-template #previewImage>
+      <app-animal [url]="preview" title="Preview"></app-animal>
+    </ng-template>
+  </form>
+</div>
