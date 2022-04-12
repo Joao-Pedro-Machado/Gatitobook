@@ -20,11 +20,47 @@
       </div>
       <app-message
         message="Por favor selecione uma foto"
-        *ngIf="!!animalForm.get('file')?.errors?.['maxLength']"
+        *ngIf="!!animalForm.get('file')?.errors?.['required']"
       ></app-message>
+      <ng-template #previewImage>
+        <app-animal [url]="preview" title="Preview"></app-animal>
+      </ng-template>
     </div>
-    <ng-template #previewImage>
-      <app-animal [url]="preview" title="Preview"></app-animal>
-    </ng-template>
+    <div class="col-md-6">
+      <div class="form-group">
+        <textarea
+          formControlName="description"
+          class="form-control form-control-sm"
+          placeholder="Descrição do animal"
+        ></textarea>
+        <app-message
+          message="Tamanho máximo do campo é 300 caracteres"
+          *ngIf="!!animalForm.get('description')?.errors?.['maxLength']"
+        ></app-message>
+      </div>
+
+      <div class="form-group">
+        <label class="text-muted">
+          Permite comentário
+          <input type="checkbox" formControlName="allowComments" />
+        </label>
+      </div>
+
+      <div *ngIf="!conclusion; else uploadDiv">
+        <button
+          [disabled]="animalForm.invalid"
+          type="submit"
+          class="btn btn-primary btn-block"
+        ></button>
+
+        <a [routerLink]="['animals']" class="btn btn-secondary btn-block"
+          >Cancelar</a
+        >
+      </div>
+
+      <ng-template #uploadDiv>
+        <div class="text-center display-4">Enviando {{ conclusion }} %</div>
+      </ng-template>
+    </div>
   </form>
 </div>
