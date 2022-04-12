@@ -2,15 +2,14 @@
   <h4 class="text-center">Comentários</h4>
 
   <div *ngIf="comments$ | async as comments">
-    <ul
-      class="list-unstyled comment-list border rounded border-dark overflow-hidden"
-    >
+    <ul class="list-unstyled comment-list border border-dark overflow-hidden">
       <li class="m-2 border-bottom" *ngFor="let comment of comments">
         <div class="d-flex justify-content-between">
           <p class="text-dark font-weight-bold mx-1 d-inline">
             {{ comment.userName }}
           </p>
-          <p class="d-inline">{{ comment.date | date: "dd-MM-yyyy HH:mm" }}</p>
+          <p class="d-inline">{{ comment.date | date: "dd-MM-yyyy" }}</p>
+          <p class="d-inline">{{ comment.date | date: "HH:mm" }}</p>
         </div>
 
         <p class="break-word mb-2">{{ comment.text }}</p>
