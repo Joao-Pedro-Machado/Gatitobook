@@ -15,12 +15,12 @@ export class CommentsComponent implements OnInit {
   commentForm!: FormGroup;
 
   constructor(
-    private commentService: CommentsService,
+    private commentsService: CommentsService,
     private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.comments$ = this.commentService.findComment(this.id);
+    this.comments$ = this.commentsService.findComment(this.id);
     this.commentForm = this.formBuilder.group({
       comment: ['', Validators.maxLength(300)],
     });
@@ -28,8 +28,8 @@ export class CommentsComponent implements OnInit {
 
   save(): void {
     const comment = this.commentForm.get('comment')?.value ?? '';
-    this.comments$ = this.commentService.addComment(this.id, comment).pipe(
-      switchMap(() => this.commentService.findComment(this.id)),
+    this.comments$ = this.commentsService.addComment(this.id, comment).pipe(
+      switchMap(() => this.commentsService.findComment(this.id)),
       tap(() => {
         this.commentForm.reset();
         alert('Comentário salvo');
