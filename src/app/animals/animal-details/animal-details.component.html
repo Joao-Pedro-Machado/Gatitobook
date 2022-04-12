@@ -1,48 +1,58 @@
-<div class="bg-white border" *ngIf="animal$ | async as animal">
+<div
+  class="conatiner bg-white overflow-hidden p-2"
+  *ngIf="animal$ | async as animal"
+>
   <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-6">
       <app-animal
         [url]="animal.url"
         [description]="animal.description"
       ></app-animal>
     </div>
+  </div>
+
+  <div class="d-inline">
+    <div class="d-flex flex-row">
+      <p class="text-left">{{ animal.description }}</p>
+
+      <button
+        (click)="like()"
+        class="btn btn-default mx-2 interact-button mt-2"
+      >
+        <i class="heart fa fa-heart fa-2x fa-beat pull pull-left"></i>
+        <span class="fs-4">
+          {{ animal.likes }}
+        </span>
+      </button>
+
+      <button class="btn btn-default mx-2 interact-button mt-2">
+        <i class="fa fa-comment-o fa-2x pull pull-left"></i>
+        <span class="fs-4">{{ animal.comments }}</span>
+      </button>
+
+      <button
+        (click)="remove()"
+        class="btn btn-default interact-button mx-2 mt-2"
+      >
+        <i class="fa fa-trash-o fa-2x"></i>
+      </button>
+
+      <a [routerLink]="['/animals']">
+        <button class="btn btn-primary m-2 interact-button">Voltar</button>
+      </a>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-start">
     <div class="col-lg-4">
-      <div class="d-flex flex-row">
-        <p class="text-left breack-word">{{ animal.description }}</p>
-        <button class="btn mx-2">
-          <i
-            (click)="like()"
-            class="heart fa fa-heart fa-2x fa-beat pull pull-left"
-          ></i>
-          <span class="fs-4">
-            {{ animal.likes }}
-          </span>
-        </button>
+      <app-comments
+        [id]="animalId"
+        *ngIf="animal.allowComments; else warning"
+      ></app-comments>
 
-        <button class="btn mx-2">
-          <i class="fa fa-comment-o fa-2x pull pull-left"></i>
-          <span class="fs-4">{{ animal.comments }}</span>
-        </button>
-
-        <button class="btn">
-          <i (click)="remove()" class="fa fa-trash-o fa-2x"></i>
-        </button>
-
-        <a [routerLink]="['/animals']">
-          <button class="btn btn-primary mx-4 mt-2">Voltar</button>
-        </a>
-
-        <div class="">
-          <app-comments
-            [id]="animalId"
-            *ngIf="animal.allowComments; else warning"
-          ></app-comments>
-
-          <ng-template #warning>
-            <p>Comentários desabilitados</p>
-          </ng-template>
-        </div>
-      </div>
+      <ng-template #warning>
+        <p>Comentários desabilitados</p>
+      </ng-template>
     </div>
   </div>
 </div>
