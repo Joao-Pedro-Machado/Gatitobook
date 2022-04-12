@@ -4,8 +4,8 @@
   >
     <a
       class="navbar-brand mx-3"
-      (click)="menu.openMenu()"
-      (keyup)="menu.openMenu()"
+      (click)="menu.toggleMenu()"
+      (keyup)="menu.toggleMenu()"
     >
       <i class="fa fa-bars mx-1"></i>
       Gatito Book
@@ -13,7 +13,9 @@
     <app-menu #menu>
       <ul class="list-unstyled">
         <li>
-          <a [routerLink]="['animals', 'new']">Nova foto</a>
+          <a (click)="menu.toggleMenu()" [routerLink]="['/animals', 'new']"
+            >Nova foto
+          </a>
         </li>
       </ul>
     </app-menu>

@@ -1,8 +1,8 @@
 <div [ngClass]="{ 'active-menu': showMenu }">
   <div class="menu-bar">
-    <i class="fa fa-window-close" (click)="openMenu()"></i>
+    <i class="fa fa-window-close" (click)="toggleMenu()"></i>
     <ng-content></ng-content>
   </div>
 
-  <div class="overlay" (click)="openMenu()"></div>
+  <div class="overlay" (click)="toggleMenu()"></div>
 </div>

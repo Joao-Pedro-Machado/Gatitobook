@@ -15,14 +15,14 @@ const routes: Routes = [
       },
       {
         path: 'newUser',
-        component: NewUserComponent
-      }
-    ]
-  }
+        component: NewUserComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class HomeRoutingModule { }
+export class HomeRoutingModule {}
