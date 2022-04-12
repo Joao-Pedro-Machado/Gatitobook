@@ -2,7 +2,22 @@
   <nav
     class="navbar navbar-expand-lg navbar-light bg-withe d-flex justify-content-between"
   >
-    <a class="navbar-brand mx-5 pe-none">Gatito Book</a>
+    <a
+      class="navbar-brand mx-3"
+      (click)="menu.openMenu()"
+      (keyup)="menu.openMenu()"
+    >
+      <i class="fa fa-bars mx-1"></i>
+      Gatito Book
+    </a>
+    <app-menu #menu>
+      <ul class="list-unstyled">
+        <li>
+          <a [routerLink]="['animals', 'new']">Nova foto</a>
+        </li>
+      </ul>
+    </app-menu>
+
     <div *ngIf="user$ | async as user">
       <div *ngIf="user.name">
         <ul class="navbar-nav mx-4">
